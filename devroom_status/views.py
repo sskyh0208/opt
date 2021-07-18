@@ -52,11 +52,35 @@ def export_csv(request, type=None, year=None, month=None, day=None):
 def set_plt():
     # 1時間だけ
     devroom_data = DevroomStatus.objects.all().order_by('-created_at')[:60]
+    # 横軸(時間)
     x = [data.created_at for data in devroom_data]
-    y1 = [data.temperature for data in devroom_data]
-    y2 = [data.humidity for data in devroom_data]
-    y3 = [data.co2 for data in devroom_data]
-    plt.plot(x, y1, x, y2, x, y3)
+    plt.subplots(figsize=(16.0, 8.0))
+    # 縦軸(気温)
+    plt.subplot(3, 1, 1)
+    temp = [data.temperature for data in devroom_data]
+    plt.xlabel('time')
+    plt.ylabel('℃')
+    plt.title('temperature')
+    plt.tight_layout()
+    plt.plot(x, temp)
+
+    # 縦軸(湿度)
+    plt.subplot(3, 1, 2)
+    humidity = [data.humidity for data in devroom_data]
+    plt.xlabel('time')
+    plt.ylabel('%')
+    plt.title('humidity')
+    plt.tight_layout()
+    plt.plot(x, humidity)
+
+    # 縦軸(二酸化炭素濃度)
+    plt.subplot(3, 1, 3)
+    co2 = [data.co2 for data in devroom_data]
+    plt.xlabel('time')
+    plt.ylabel('ppm')
+    plt.title('co2')
+    plt.tight_layout()
+    plt.plot(x, co2)
 
 def plt_to_svg():
     buf = io.BytesIO()
