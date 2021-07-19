@@ -1,10 +1,11 @@
 {% extends 'base.html' %}
 {% block content %}
-<h1>グラフ</h1>
 <div>
-    <a href="{% url 'devroom_status:export' %}">全件ダウンロード</a>
+    <a href="{% url 'devroom_status:export' %}">記録のダウンロード</a>
 </div>
+<h1>過去1時間のグラフ</h1>
 <img src="{% url 'devroom_status:plot' %}">
+<h1>過去1時間の記録</h1>
 <table class="table">
     <thead>
         <tr>

@@ -54,7 +54,7 @@ def set_plt():
     devroom_data = DevroomStatus.objects.all().order_by('-created_at')[:60]
     # 横軸(時間)
     x = [data.created_at for data in devroom_data]
-    plt.subplots(figsize=(16.0, 8.0))
+    plt.subplots(figsize=(11.0, 8.0))
     # 縦軸(気温)
     plt.subplot(3, 1, 1)
     temp = [data.temperature for data in devroom_data]
