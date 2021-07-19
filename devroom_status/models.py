@@ -5,7 +5,7 @@ from django.utils import timezone
 class DevroomStatus(models.Model):
     temperature = models.DecimalField(max_digits=100, decimal_places=1)
     humidity = models.DecimalField(max_digits=100, decimal_places=1)
-    co2 = models.IntegerField()
+    co2 = models.IntegerField(null=True, blank=True)
     created_at = models.DateTimeField(default=timezone.now)
 
     class Meta:
